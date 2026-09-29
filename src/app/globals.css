@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens. Light first; dark overrides below. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #f1f3f6;
+  --surface-3: #e7eaef;
+  --line: #e2e6ec;
+  --fg: #0e1726;
+  --fg-muted: #4b5668;
+  --fg-subtle: #7b8596;
+  --brand: #0f766e;
+  --brand-fg: #ffffff;
+  --brand-2: #0891b2;
+  --success: #15803d;
+  --warning: #b45309;
+  --danger: #dc2626;
+  --info: #2563eb;
+}
+
+.dark {
+  --bg: #0a0f17;
+  --surface: #111824;
+  --surface-2: #172031;
+  --surface-3: #1f2a3d;
+  --line: #243044;
+  --fg: #e8edf5;
+  --fg-muted: #a3aec0;
+  --fg-subtle: #748096;
+  --brand: #2dd4bf;
+  --brand-fg: #042f2e;
+  --brand-2: #22d3ee;
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --info: #60a5fa;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-brand: var(--brand);
+  --color-brand-fg: var(--brand-fg);
+  --color-brand-2: var(--brand-2);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--brand) 25%, transparent);
+}
+
+/* Rendered markdown (release notes, installation notes). */
+.prose-fw {
+  color: var(--fg-muted);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+.prose-fw > * + * {
+  margin-top: 0.8em;
+}
+.prose-fw h1,
+.prose-fw h2,
+.prose-fw h3,
+.prose-fw h4 {
+  color: var(--fg);
+  font-weight: 600;
+  margin-top: 1.4em;
+  line-height: 1.3;
+}
+.prose-fw h1 { font-size: 1.25rem; }
+.prose-fw h2 { font-size: 1.125rem; }
+.prose-fw h3, .prose-fw h4 { font-size: 1rem; }
+.prose-fw ul { list-style: disc; padding-left: 1.25rem; }
+.prose-fw ol { list-style: decimal; padding-left: 1.25rem; }
+.prose-fw li + li { margin-top: 0.25em; }
+.prose-fw a { color: var(--brand); text-decoration: underline; text-underline-offset: 2px; }
+.prose-fw strong { color: var(--fg); font-weight: 600; }
+.prose-fw code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.1em 0.35em;
+}
+.prose-fw pre {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+}
+.prose-fw pre code { background: none; border: 0; padding: 0; }
+.prose-fw blockquote { border-left: 3px solid var(--line); padding-left: 1rem; }
+.prose-fw table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.prose-fw th, .prose-fw td { border: 1px solid var(--line); padding: 0.4rem 0.6rem; text-align: left; }
+.prose-fw > :first-child { margin-top: 0; }
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}

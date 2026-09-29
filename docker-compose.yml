@@ -1,0 +1,8 @@
+# Local development helpers. CouchDB is NOT included — the app uses your existing instance.
+services:
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025" # web UI — invite emails show up here
+      - "1025:1025" # SMTP
+    restart: unless-stopped
