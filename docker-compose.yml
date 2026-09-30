@@ -1,8 +1,22 @@
-# Local development helpers. CouchDB is NOT included — the app uses your existing instance.
+# Local development services.
 services:
+  couchdb:
+    image: couchdb:3
+    ports:
+      - "5984:5984"
+    environment:
+      COUCHDB_USER: ${COUCHDB_USER:-fw_app}
+      COUCHDB_PASSWORD: ${COUCHDB_PASSWORD:-change-me}
+    volumes:
+      - couchdb_data:/opt/couchdb/data
+    restart: unless-stopped
+
   mailpit:
     image: axllent/mailpit:latest
     ports:
       - "8025:8025" # web UI — invite emails show up here
       - "1025:1025" # SMTP
     restart: unless-stopped
+
+volumes:
+  couchdb_data:
