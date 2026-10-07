@@ -12,6 +12,7 @@ export const metadata: Metadata = { title: "Awaiting approval" };
 export default async function PendingPage() {
   const ctx = await currentOidc();
   if (!ctx) redirect("/portal/signin");
+  if (ctx.isAdmin) redirect("/admin");
   if (ctx.oem?.status === "active" && ctx.oem.orgId) redirect("/portal");
   await logEventSoft(ctx.actor, "page.view", { meta: { path: "/portal/pending", status: ctx.oem?.status } });
 

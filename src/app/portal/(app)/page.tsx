@@ -1,6 +1,7 @@
 import { PackagePlus, Upload } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Card, EmptyState, LinkButton, PageHeader, StatusBadge, Table } from "@/components/ui";
 import { formatBytes, relativeDate } from "@/lib/format";
 import { requireOem } from "@/lib/guards";
@@ -11,6 +12,7 @@ export const metadata: Metadata = { title: "My firmware" };
 
 export default async function PortalHome() {
   const ctx = await requireOem("/portal");
+  if (ctx.isAdmin) redirect("/admin");
   const [items, org, models] = await Promise.all([listFirmwareForOrg(ctx.orgId), getOrg(ctx.orgId), listModels()]);
   const modelName = Object.fromEntries(models.map((m) => [m._id, m.name]));
 
